@@ -9,6 +9,13 @@
             <small class="text-muted">更新日：<%= @recipe.updated_at.strftime("%Y-%m-%d") %></small>
           </p>
 
+          <% if current_user.already_favorited?(@recipe) %>
+          <%= link_to "いいねを外す",recipe_favorites_path(@recipe),method: :delete %>
+          <% else %>
+          <%= link_to "いいね",recipe_favorites_path(@recipe),method: :post %>
+          <% end %>
+          <%= @recipe.favorites.count %>
+
           <% if @recipe.user == current_user %>
             <%= link_to '編集', edit_recipe_path(@recipe), class: "btn btn-success" %>
             <%= link_to '削除', recipe_path(@recipe), method: :delete, class: "btn btn-danger" %>

@@ -1,2 +1,31 @@
-<h1>Recipes#index</h1>
-<p>Find me in app/views/recipes/index.html.erb</p>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-10 mx-auto">
+      <table class="table table-hover">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">レシピ名</th>
+            <th scope="col">投稿者</th>
+            <th scope="col">　</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @recipes.each do |recipe| %>
+          <tr>
+            <td><%= link_to recipe.title, recipe_path(recipe) %></td>
+            <td><%= recipe.user.name %></td>
+            <td>
+              <% if current_user.already_favorited?(recipe) %>
+                <%= link_to "いいねを外す",recipe_favorites_path(recipe),method: :delete %>
+                <% else %>
+                <%= link_to "いいね",recipe_favorites_path(recipe),method: :post %>
+              <% end %>
+              <%= recipe.favorites.count %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+        </table>
+      </dev>
+    </dev>
+</dev>
